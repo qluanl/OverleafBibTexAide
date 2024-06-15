@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Overleaf BibTeX Search Shortcuts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            width: 200px;
+        }
+        .setting {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        input[type="text"], select {
+            padding: 8px;
+            width: 90%;
+            margin-bottom: 16px;
+        }
+        button {
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #17b31d;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h2>Overleaf BibTeX Search Shortcuts</h2>
+    
+    <div class="setting">
+        <label for="enableExtension">Enable Extension:</label>
+        <label class="switch">
+            <input type="checkbox" id="enableExtension">
+            <span class="slider"></span>
+        </label>
+    </div>
+    
+    <hr>
+    
+    <h3>Options</h3>
+    
+    <label for="shortcutAutoComplete">Shortcut for auto complete:</label>
+    <input type="text" id="shortcutAutoComplete" data-tag="hotkey" placeholder="Ctrl+KeyJ">
+    
+    <label for="shortcutBibtexSearch">Shortcut for bibtex search:</label>
+    <input type="text" id="shortcutBibtexSearch" data-tag="hotkey" placeholder="Ctrl+Shift+KeyJ">
+    
+    
+    <div class="setting">
+        <button id="save" disabled="true">Save</button>
+        <button id="openOptions">Adv. Options</button>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

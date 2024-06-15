@@ -1,0 +1,115 @@
+#!/bin/bash
+
+echo ""
+
+# Define chrome extension dir name and target name
+EXTENSION_DIR="ChromeExtension"
+TARGET_CRX_NAME="OverleafBibTexAide_Chrome"
+CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+echo "=== Extension information ==="
+
+MANIFEST_PATH="$EXTENSION_DIR/manifest.json"
+# Read from manifest.json
+output=$(python3 -c "
+import json
+with open('$MANIFEST_PATH') as f:
+    data = json.load(f)
+    print(data.get('name', ''))
+    print(data.get('description', ''))
+    print(data.get('version', ''))
+    print(data.get('author', ''))
+")
+
+# Split the output into an array
+IFS=$'\n' read -d '' -r -a lines <<< "$output"
+
+# Assign the array elements to variables
+NAME=${lines[0]}
+DESCRIPTION=${lines[1]}
+VERSION=${lines[2]}
+AUTHOR=${lines[3]}
+
+echo "Name: $NAME"
+echo "Description: $DESCRIPTION"
+echo "Version: $VERSION"
+echo "Author: $AUTHOR"
+
+echo ""
+echo "=== Auto pack and generate release files ==="
+
+PEM_FILE="${TARGET_CRX_NAME}.pem"
+
+# Check PEM file
+if [ -f "$PEM_FILE" ]; then
+    echo "PEM file found. Using PEM file to pack extension."
+    # Pack extension with specific PEM file
+    "$CHROME_PATH" --pack-extension="$EXTENSION_DIR" --pack-extension-key="$PEM_FILE"
+else
+    echo "PEM file not found. Packing extension without PEM file."
+    # Pack extension without PEM file
+    "$CHROME_PATH" --pack-extension="$EXTENSION_DIR"
+    # Rename the PEM file
+    mv "${EXTENSION_DIR}.pem" "${TARGET_CRX_NAME}.pem"
+fi
+
+# Rename generated CRX file
+mv "${EXTENSION_DIR}.crx" "${TARGET_CRX_NAME}.crx"
+
+echo "Extension packed and renamed to $TARGET_CRX_NAME.crx"
+
+echo ""
+echo "=== Generate Tampermonkey script ==="
+
+CONTENT_JS_PATH="$EXTENSION_DIR/content.js"
+USER_JS_PATH="OverleafBibTexAide_Tampermonkey.user.js"
+
+# Check if files exist
+if [ ! -f "$CONTENT_JS_PATH" ]; then
+  echo "content.js not found at $CONTENT_JS_PATH"
+  exit 1
+fi
+
+if [ ! -f "$MANIFEST_PATH" ]; then
+  echo "manifest.json not found at $MANIFEST_PATH"
+  exit 1
+fi
+
+
+# Read content.js
+CONTENT_JS=$(cat "$CONTENT_JS_PATH")
+
+# Tampermonkey script header
+USER_JS_HEADER="
+// ==UserScript==
+// @name         $NAME
+// @namespace    http://tampermonkey.net/
+// @version      $VERSION
+// @description  $DESCRIPTION
+// @author       $AUTHOR
+// @match        https://www.overleaf.com/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+"
+
+
+# Tampermonkey script footer
+USER_JS_FOOTER="
+
+})();
+"
+
+# Combine the header, content.js, and footer to generate the final user script
+{
+    echo "$USER_JS_HEADER"
+    echo "$CONTENT_JS"
+    echo "$USER_JS_FOOTER"
+} > "$USER_JS_PATH"
+
+
+echo "Tampermonkey script generated at $USER_JS_PATH"
+echo ""

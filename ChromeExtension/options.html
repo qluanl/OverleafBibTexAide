@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Overleaf Advanced Shortcut Options</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .setting {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        select {
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 8px;
+            width: 95%;
+            margin-bottom: 16px;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #17b31d;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Overleaf BibTeX Search Shortcuts</h1>
+    
+    <div class="setting">
+        <label for="enableExtension">Enable Extension:</label>
+        <label class="switch">
+            <input type="checkbox" id="enableExtension">
+            <span class="slider"></span>
+        </label>
+    </div>
+    
+    <hr>
+    
+    <h2>Options</h2>
+    
+    <label for="shortcutAutoComplete">Set your shortcut for auto complete:</label>
+    <input type="text" id="shortcutAutoComplete" data-tag="hotkey" placeholder="Ctrl+KeyJ">
+    
+    <label for="shortcutBibtexSearch">Set your shortcut for bibtex search:</label>
+    <input type="text" id="shortcutBibtexSearch" data-tag="hotkey" placeholder="Ctrl+Shift+KeyJ">
+    
+    
+    <h2>Advanced Options</h2>
+    <div class="setting">
+        <label for="useSyncStorage">Use Synchronized Config:</label>
+        <label class="switch">
+            <input type="checkbox" id="useSyncStorage">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    
+    <div class="setting">
+        <label for="debugEnabled">Enable Debug Log:</label>
+        <label class="switch">
+            <input type="checkbox" id="debugEnabled">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    
+    <label for="system">Select Your System:</label>
+    <select id="system">
+        <option value="win">Windows (Ctrl+Space)</option>
+        <option value="mac">MacOS (Alt+Space)</option>
+        <!-- <option value="ios">iOS</option> -->
+    </select>
+    
+    <label for="keyboardDelay">Set keyboard delay in ms:</label>
+    <input type="number" id="keyboardDelay" placeholder="50">
+    
+    <div class="setting">
+        <button id="save" disabled="true">Save</button>
+        <button id="clearStorage">Clear Settings</button>
+      </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
