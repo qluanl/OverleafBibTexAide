@@ -29,7 +29,7 @@ This project is designed as a Chrome extension and contains an alternative Tampe
    > Download from the [chrome web store](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
    >
    > Or check [Tampermonkey's homepage](https://www.tampermonkey.net/) for more information.
-2. Simply click this [Tamplermonkey script](OverleafBibTexAide_Tampermonkey.user.js) to install.
+2. Simply click this [Tamplermonkey script](https://github.com/qluanl/OverleafBibTexAide/raw/main/OverleafBibTexAide_Tampermonkey.user.js) to install.
 
 > #### Which one should I use?
 > Well, it is your own choice, really. 
@@ -67,6 +67,7 @@ Customizing in Tampermonkey is a bit more complex. To do so, follow these steps:
 2. Click on "Installed Userscripts."
 3. Open our script.
 4. Modify the variables `shortcutAutoComplete` and `shortcutBibtexSearch` according to the long comments in the script.
+5. Refresh the overleaf page to active your modifications.
 
 
 ## Known Bugs
