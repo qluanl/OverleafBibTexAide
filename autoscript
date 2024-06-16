@@ -62,6 +62,7 @@ echo ""
 echo "=== Generate Tampermonkey script ==="
 
 CONTENT_JS_PATH="$EXTENSION_DIR/content.js"
+DEFAULT_CONFIG_JS_PATH="$EXTENSION_DIR/defaultConfig.js"
 USER_JS_PATH="OverleafBibTexAide_Tampermonkey.user.js"
 
 # Check if files exist
@@ -77,6 +78,7 @@ fi
 
 
 # Read content.js
+DEFAULT_CONFIG_JS=$(cat "$DEFAULT_CONFIG_JS_PATH")
 CONTENT_JS=$(cat "$CONTENT_JS_PATH")
 
 # Tampermonkey script header
@@ -106,6 +108,7 @@ USER_JS_FOOTER="
 # Combine the header, content.js, and footer to generate the final user script
 {
     echo "$USER_JS_HEADER"
+    echo "$DEFAULT_CONFIG_JS"
     echo "$CONTENT_JS"
     echo "$USER_JS_FOOTER"
 } > "$USER_JS_PATH"

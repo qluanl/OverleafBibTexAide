@@ -13,10 +13,14 @@
     'use strict';
 
 
-
-var shortcutAutoComplete_default = 'Ctrl+KeyJ';
-var shortcutBibtexSearch_default = 'Ctrl+Shift+KeyJ';
-
+// Default Config
+// Included and shared by content.js, options page, and popup page
+const shortcutAutoComplete_default = 'Ctrl+KeyJ';
+const shortcutBibtexSearch_default = 'Ctrl+Shift+KeyJ';
+const debugEnabled_default = false;
+const enableExtension_default = true;
+const extensionSystem_default = 'mac';
+const keyboardDelay_default = 50;
 /* Define shortcuts pattern
 **** This comment is only for Tampermonkey usage
 **** Use options page for Chrome extension
@@ -45,14 +49,14 @@ var shortcutAutoComplete = shortcutAutoComplete_default;
 var shortcutBibtexSearch = shortcutBibtexSearch_default;
 
 // "Global" bool
-var debugEnabled = true;
-var enableExtension = true;
+var debugEnabled = debugEnabled_default;
+var enableExtension = enableExtension_default;
 
-// System char
-var extensionSystem = '';
+// System char (default: mac)
+var operatingSystem = operatingSystem_default;
 
-// Keyboard delay (ms)
-var keyboardDelay = 50;
+// Keyboard delay (ms) (default: 50)
+var keyboardDelay = keyboardDelay_default;
 
 // Customized log function
 function log(message) {
@@ -132,15 +136,16 @@ async function triggerCtrlSpace() {
 }
 
 async function triggerAutoComplete() {
-    switch (extensionSystem.toUpperCase()) {
+    switch (operatingSystem.toUpperCase()) {
       case 'WIN':
+      case 'LINUX':
         triggerCtrlSpace();
         break;
       case 'MAC':
         triggerAltSpace();
         break;
       default:
-        console.warning("Unkown operating system " + extensionSystem + ". Using Mac.");
+        console.warning("Unkown operating system " + operatingSystem + ". Using Mac.");
         triggerAltSpace();
         
     }

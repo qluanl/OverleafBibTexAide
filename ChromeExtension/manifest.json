@@ -8,6 +8,9 @@
     "activeTab",
     "storage"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "icons": {
     "16": "resources/icon16.png",
     "32": "resources/icon32.png",
@@ -27,7 +30,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.overleaf.com/*"],
-      "js": ["content.js", "getOptions.js"]
+      "js": ["defaultConfig.js", "content.js", "getOptions.js"]
     }
   ]
 }

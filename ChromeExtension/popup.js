@@ -1,14 +1,33 @@
 
 // "Global" bool
-var debugEnabled = false;
+var debugEnabled_popupPage = debugEnabled_default;
 // Customized log function
 function log(message) {
-    if (debugEnabled) {
+    if (debugEnabled_popupPage) {
         console.log(message);
     }
 }
 
+// Set placeholder
+document.getElementById('shortcutAutoComplete').placeholder = shortcutAutoComplete_default;
+document.getElementById('shortcutBibtexSearch').placeholder = shortcutBibtexSearch_default;
+
+// Initialize storage location
 var storage = chrome.storage.local;
+
+// Read and show current config
+function refreshElements(){
+  storage.get(['shortcutAutoComplete', 'shortcutBibtexSearch', 'debugEnabled'], function(result) {
+      document.getElementById('shortcutAutoComplete').value = result.shortcutAutoComplete || '';
+      document.getElementById('shortcutBibtexSearch').value = result.shortcutBibtexSearch || '';
+      // Sync debug bool for this page
+      debugEnabled_popupPage = (result.debugEnabled !== undefined) ? result.debugEnabled : debugEnabled_default;
+  });
+  chrome.storage.local.get(['enableExtension'], function(result) {
+      document.getElementById('enableExtension').checked = (result.enableExtension !== undefined) ? result.enableExtension : enableExtension_default;
+  });
+}
+
 // Read storage setting
 function refreshStorageConfig() {
     // Read storage setting
@@ -23,18 +42,19 @@ function refreshStorageConfig() {
             storage = chrome.storage.local;
             break;
         }
-        // Read and show current config
-        storage.get(['shortcutAutoComplete', 'shortcutBibtexSearch'], function(result) {
-            document.getElementById('shortcutAutoComplete').value = result.shortcutAutoComplete || '';
-            document.getElementById('shortcutBibtexSearch').value = result.shortcutBibtexSearch || '';
-        });
-        chrome.storage.local.get(['enableExtension'], function(result) {
-            document.getElementById('enableExtension').checked = (result.enableExtension !== undefined) ? result.enableExtension : true;
-        });
+        refreshElements();
     });
 }
 
+// Refresh once upon open popup page
+refreshStorageConfig();
 
+// Refresh if configuration had been changed
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+    refreshStorageConfig();
+});
+
+// Save configuration
 document.getElementById('save').addEventListener('click', function() {
     const shortcutAutoComplete = document.getElementById('shortcutAutoComplete').value;
     const shortcutBibtexSearch = document.getElementById('shortcutBibtexSearch').value;
@@ -59,7 +79,6 @@ document.getElementById('enableExtension').addEventListener('change', function()
         enableExtension: enableExtension
     }, function() {
         log('Extension ' + (enableExtension) ? 'Enabled' : 'Disabled');
-        // refreshStorageConfig();
     });
 });
 
@@ -68,10 +87,7 @@ function enableSave() {
   document.getElementById('save').innerText = "Save";
 }
 
-refreshStorageConfig();
-
-
-
+// Auto filling the hotkey input box
 document.addEventListener('keydown', async function(e) {
     var activeElement = document.activeElement;
     if (activeElement && activeElement.dataset.tag == 'hotkey') {

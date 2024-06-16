@@ -20,16 +20,18 @@ There are three functionalities of this project:
 This project is designed as a Chrome extension and contains an alternative Tampermonkey script.
 
 ### Use as Chrome Extension
-1. Download the CRX file [OverleafBibTexAide_Chrome.crx](OverleafBibTexAide_Chrome.crx)
+1. Download the CRX file [OverleafBibTexAide_Chrome.crx](https://github.com/qluanl/OverleafBibTexAide/raw/main/OverleafBibTexAide_Chrome.crx)
 2. Open the extension manage page: [chrome://extensions/](chrome://extensions/)
 3. Turn on the develop mode (top right corner)
 4. Drag the downloaded file to this page to install
+
 ### Use in Tampermonkey
 1. Make sure Tampermonkey is installed on your browser.
    > Download from the [chrome web store](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
    >
    > Or check [Tampermonkey's homepage](https://www.tampermonkey.net/) for more information.
 2. Simply click this [Tamplermonkey script](https://github.com/qluanl/OverleafBibTexAide/raw/main/OverleafBibTexAide_Tampermonkey.user.js) to install.
+3. Change the `extensionSystem` variable in the script to `'mac'` or `'win'`. (See customize for more information)
 
 > #### Which one should I use?
 > Well, it is your own choice, really. 
@@ -47,6 +49,7 @@ Overleaf uses `Ctrl+Space` (or `Alt+Space` on some Mac systems) to open the auto
 - This extension/script allows you to press `Ctrl+J` (default) to open the auto-complete window and the reference search. It simply maps `Ctrl+J` to the keyboard event `Ctrl+Space`/`Alt+Space`. 
 - Additionally, if you have selected some text in the editor, the script will automatically paste your selection into the advanced reference search bar.
 - To further simplify the process, you can also press `Ctrl+Shift+J` (default) to directly open the advanced search without needing to press `Ctrl+J` twice.
+- Chrome extension will automatically detect your operating system upon installation. You have to manually config it for Tampermonkey script.
 
 
 ## Customize
@@ -60,6 +63,8 @@ There are two user-friendly pages where you can change the configurations:
 2. **Options Page**: Click "Advanced Options" on the popup page to access additional settings (including OS configuration).
    - You can choose to save the configuration locally or synchronize it through your Google account.
 
+New settings would immediately apply, no refresh needed.
+
 #### Tampermonkey Script
 Customizing in Tampermonkey is a bit more complex. To do so, follow these steps:
 
@@ -67,15 +72,19 @@ Customizing in Tampermonkey is a bit more complex. To do so, follow these steps:
 2. Click on "Installed Userscripts."
 3. Open our script.
 4. Modify the variables `shortcutAutoComplete` and `shortcutBibtexSearch` according to the long comments in the script.
+5. Modify the variable `operatingSystem` to `'mac'` / `'win'` / `'linux'` according to your OS.
 5. Refresh the overleaf page to active your modifications.
 
 
-## Known Bugs
+## Known Issues
 - I attempted to convert the Chrome extension to a Safari extension, but I'm unsure how to do it correctly.
+- Tampermonkey script can use similar approach to detect the OS as extension, but not implemented yet.
+- I didn't fully test on different OSs. Please report bugs to me.
+- Synchronization of configurations is not tested. It should work though.
 
 ## Others
 
-### Fork and build
+### Fork and Build
 - You can clone/fork/download this project and load the folder [ChromeExtension](ChromeExtension) to Chrome (dev mode required). Then you can modify the source code.
 
 - This project is based on the Chrome extension, to pack the extension and generate the Tampermonkey script, run the bash script [autoscript](autoscript). (You may have to config the path to Chrome.)

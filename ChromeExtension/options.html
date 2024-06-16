@@ -96,56 +96,57 @@
     <h1>Overleaf BibTeX Search Shortcuts</h1>
     
     <div class="setting">
-        <label for="enableExtension">Enable Extension:</label>
+        <label for="enableExtension">Enable extension:</label>
         <label class="switch">
             <input type="checkbox" id="enableExtension">
             <span class="slider"></span>
         </label>
     </div>
     
+    <label for="operatingSystem">Select your system:</label>
+    <select id="operatingSystem">
+        <option value="win">Windows (Ctrl+Space)</option>
+        <option value="mac">MacOS (Alt+Space)</option>
+        <option value="linux">Linux (Ctrl+Space)</option>
+        <!-- <option value="ios">iOS</option> -->
+    </select>
+    
     <hr>
     
     <h2>Options</h2>
     
-    <label for="shortcutAutoComplete">Set your shortcut for auto complete:</label>
-    <input type="text" id="shortcutAutoComplete" data-tag="hotkey" placeholder="Ctrl+KeyJ">
-    
-    <label for="shortcutBibtexSearch">Set your shortcut for bibtex search:</label>
-    <input type="text" id="shortcutBibtexSearch" data-tag="hotkey" placeholder="Ctrl+Shift+KeyJ">
-    
-    
-    <h2>Advanced Options</h2>
     <div class="setting">
-        <label for="useSyncStorage">Use Synchronized Config:</label>
+        <label for="useSyncStorage">Use synchronized config for following:</label>
         <label class="switch">
             <input type="checkbox" id="useSyncStorage">
             <span class="slider round"></span>
         </label>
     </div>
     
+    <label for="shortcutAutoComplete">Set your shortcut for auto complete:</label>
+    <input type="text" id="shortcutAutoComplete" data-tag="hotkey">
+    
+    <label for="shortcutBibtexSearch">Set your shortcut for bibtex search:</label>
+    <input type="text" id="shortcutBibtexSearch" data-tag="hotkey">
+    
+    
     <div class="setting">
-        <label for="debugEnabled">Enable Debug Log:</label>
+        <label for="debugEnabled">Enable debug log:</label>
         <label class="switch">
             <input type="checkbox" id="debugEnabled">
             <span class="slider round"></span>
         </label>
     </div>
     
-    <label for="system">Select Your System:</label>
-    <select id="system">
-        <option value="win">Windows (Ctrl+Space)</option>
-        <option value="mac">MacOS (Alt+Space)</option>
-        <!-- <option value="ios">iOS</option> -->
-    </select>
-    
     <label for="keyboardDelay">Set keyboard delay in ms:</label>
-    <input type="number" id="keyboardDelay" placeholder="50">
+    <input type="number" id="keyboardDelay">
     
     <div class="setting">
         <button id="save" disabled="true">Save</button>
         <button id="clearStorage">Clear Settings</button>
       </div>
   </div>
+  <script src="defaultConfig.js"></script>
   <script src="options.js"></script>
 </body>
 </html>
