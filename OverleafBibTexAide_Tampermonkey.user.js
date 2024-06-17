@@ -1,6 +1,6 @@
 
 // ==UserScript==
-// @name         Overleaf Advanced Shortcut
+// @name         Overleaf Autpcomplete and BibTeX Shortcut
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @description  Helpful Extension for Using BibTeX on Overleaf.
@@ -19,7 +19,7 @@ const shortcutAutoComplete_default = 'Ctrl+KeyJ';
 const shortcutBibtexSearch_default = 'Ctrl+Shift+KeyJ';
 const debugEnabled_default = false;
 const enableExtension_default = true;
-const extensionSystem_default = 'mac';
+const operatingSystem_default = 'mac';
 const keyboardDelay_default = 50;
 /* Define shortcuts pattern
 **** This comment is only for Tampermonkey usage

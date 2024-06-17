@@ -20,10 +20,7 @@ There are three functionalities of this project:
 This project is designed as a Chrome extension and contains an alternative Tampermonkey script.
 
 ### Use as Chrome Extension
-1. Download the CRX file [OverleafBibTexAide_Chrome.crx](https://github.com/qluanl/OverleafBibTexAide/raw/main/OverleafBibTexAide_Chrome.crx)
-2. Open the extension manage page: [chrome://extensions/](chrome://extensions/)
-3. Turn on the develop mode (top right corner)
-4. Drag the downloaded file to this page to install
+1. Install from [Chrome Web Store](https://chromewebstore.google.com/detail/overleaf-autpcomplete-and/acpelegceefpigddjgeeponapnnlbmeh). That's all.
 
 ### Use in Tampermonkey
 1. Make sure Tampermonkey is installed on your browser.
@@ -34,13 +31,13 @@ This project is designed as a Chrome extension and contains an alternative Tampe
 3. Change the `extensionSystem` variable in the script to `'mac'` or `'win'`. (See customize for more information)
 
 > #### Which one should I use?
-> Well, it is your own choice, really. 
+> If you are using Chrome, you should choose extension. 
 > - Chrome Extension
 >   - It works standing alone so that you don't have to install Tampermonkey (which seems to be an overkill for our purpose). It also has a better interface to customize your own shortcut key choice. 
->   - However, I do not wish to pay the $5 fee or go through the review process at this stage, so I will not publish this extension on the Chrome Web Store. As a result, you have to use the develop mode, which can be annoying and/or a security concern. Also, it is Chrome exclusive. 
+>   - However, it is Chrome exclusive. 
 > - Tampermonkey Script
->   - This might be overkill but it is easy to install (if you already have Tampermonkey) and supports cross-platform browsers.
->   - As stated above, you have to change the script manually to customize your own hotkey.
+>   - This might be overkill but it and supports many other browsers.
+>   - You have to change the script manually to customize your own hotkey and OS.
 
 ## Usage
 

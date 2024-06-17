@@ -56,6 +56,9 @@ fi
 # Rename generated CRX file
 mv "${EXTENSION_DIR}.crx" "${TARGET_CRX_NAME}.crx"
 
+# Pack ZIP file for uploading to Chrome Web Store
+zip -r "${TARGET_CRX_NAME}.zip" "$EXTENSION_DIR"
+
 echo "Extension packed and renamed to $TARGET_CRX_NAME.crx"
 
 echo ""
