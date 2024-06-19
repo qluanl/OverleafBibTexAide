@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Overleaf Autpcomplete and BibTeX Shortcut",
-  "version": "0.2",
+  "name": "Overleaf Autocomplete and BibTeX Shortcut",
+  "version": "0.2.2",
   "description": "Helpful Extension for Using BibTeX on Overleaf.",
   "author": "Shenggao Li",
   "permissions": [

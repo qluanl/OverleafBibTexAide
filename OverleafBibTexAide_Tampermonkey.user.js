@@ -1,8 +1,8 @@
 
 // ==UserScript==
-// @name         Overleaf Autpcomplete and BibTeX Shortcut
+// @name         Overleaf Autocomplete and BibTeX Shortcut
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.2.2
 // @description  Helpful Extension for Using BibTeX on Overleaf.
 // @author       Shenggao Li
 // @match        https://www.overleaf.com/*
